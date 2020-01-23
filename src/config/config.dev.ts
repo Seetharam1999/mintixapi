@@ -9,19 +9,17 @@ export class DevConfig extends BaseConfig {
 
     public DbConnectionString() {
         return {
-            url: '18.191.218.211',
+            url: 'localhost',
             user: 'root',
-            password: 'Mysql@wegot123',
+            password: 'password',
             port: 3306,
-            database: "mintixdb"
+            database: "we2db"
         };
     }
 
-   
-
     public appConfig(): IAppConfig {
         return {
-            name: 'WEGOT MINTIX API',
+            name: 'WEGOT API',
             version: '1.0.0',
             port: 3000,
             environment: Environment.development.toString(),

@@ -1,34 +1,51 @@
 import { Environment } from "./index";
-import { IAPPConfig } from "./iappconfig";
+import { IAppConfig } from "./iappconfig";
 
-export abstract class baseConfig{
+export abstract class BaseConfig {
 
-private environment: Environment;
-constructor(_environemt:Environment){
-this.environment=_environment;
-}
-abstract DbConnectionString():{
-url:string,
-user:string,
-password:string,
-port:string,
-port:number,
-database:string
-};
-abstract appConfig():{
-name:string,
-version:string,
-port:number,
-environment:string,
-baseRoute:string,
-baseTestRoute:string
-};
-abstract JSONWebToken(): {
+    private environment: Environment;
+
+    constructor(_environment: Environment) {
+        this.environment = _environment;
+    }
+
+    abstract DbConnectionString(): {
+        url: string,
+        user: string,
+        password: string,
+        port: number,
+        database: string
+    };
+
+    abstract PushNotification(): {
+        mqttUrl: string,
+        subscribePath: string,
+    };
+
+    abstract appConfig(): {
+        name: string,
+        version: string,
+        port: number,
+        environment: string,
+        baseRoute: string
+        baseTestRoute: string
+    }
+
+    abstract JSONWebToken(): {
         refreshToken: {
             expiresIn: string
         },
         accessToken: {
             expiresIn: string
         }
-    } 
+    }
+
+    abstract azureStorage(): {
+        key: string,
+        storageAccount: string
+    }
+
+    abstract microServiceConfig(): {
+        notificationBaseURL: string
+    }
 }

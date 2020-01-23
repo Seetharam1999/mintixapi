@@ -40,7 +40,48 @@ export class ValidatorSchema {
             token: joi.string().required()
         });
     }
-    
+    /**
+     * Joi validation Schema for billing
+     */
+    public billing() {
+        return joi.object({
+            apart_id: joi.number().required(),
+            site_id: joi.number().required(),
+        });
+    }
+    /**
+     * Joi validation Schema for billing history
+     */
+    public billingHistory() {
+        return joi.object({
+            apart_id: joi.number().required(),
+            site_id: joi.number().required(),
+            skip: joi.number().required(),
+            limit: joi.number().required()
+        });
+    }
+
+    /**
+     * Joi validation Schema for alarms
+     */
+    public alarms() {
+        return joi.object({
+            apart_id: joi.number().required()
+        });
+    }
+    /**
+     * Joi validation for download invoice
+     */
+    public downloadInvoice() {
+        return joi.object({
+            site_id: joi.number().required(),
+            site_name: joi.string().required(),
+            block_name: joi.string().required(),
+            cust_name: joi.string().required(),
+            invoice_month: joi.number().required(),
+            invoice_year: joi.number().required()
+        })
+    }
     /**
      * Joi validation Schema for trending
      */
@@ -113,3 +154,6 @@ export class ValidatorSchema {
         })
     }
 }
+
+
+

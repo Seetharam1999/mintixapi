@@ -189,7 +189,7 @@ export class LoginController {
                             "site_address": user[0]["site_address"],
                             "block_name": user[0]["block_name"],
                             "flat_no": user[0]["doorNo"],
-                           // "sqrft": user[0]["sqrft"]
+                            "sqrft": user[0]["sqrft"]
                         }
                         let resp = {
                             userId: userId,
@@ -198,7 +198,7 @@ export class LoginController {
                             refreshToken: refreshToken,
                             email: user[0]["email"],
                             mobileNo: user[0]["mobile_no"],
-                           // noOfPeople: user[0]["noofpeople"],
+                            noOfPeople: user[0]["noofpeople"],
                             address: address
                         }
                         Api.ok(request, response, resp);
@@ -297,3 +297,4 @@ export class LoginController {
         });
     }
 }
+

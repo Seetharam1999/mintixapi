@@ -2,7 +2,7 @@
     "swagger": "2.0",
     "info": {
         "title": "Wegot",
-        "description": "API for WEGOT mintix mobile app",
+        "description": "API for WEGOT mobile app",
         "version": "1.0"
     },
     "produces": [

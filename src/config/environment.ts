@@ -1,2 +1,3 @@
-export enum Environment{
-development,qas,prod};
+export enum Environment {
+    development, qas, prod
+};

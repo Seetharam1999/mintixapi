@@ -1,4 +1,3 @@
-
 import * as passwordHash from 'password-hash';
 import * as JsonWebToken from 'jsonwebtoken';
 import { jwt } from './../config/jwt.secret';
@@ -45,7 +44,20 @@ export class Helper {
             }
           });
 	  }
-     
+      // setting the alarm type
+    public static getAlarmType = (alarmType) => {
+        let alarmDesc;
+        if (alarmType === 1 || alarmType === 12) {
+            return "leakage";
+        } else if (alarmType === 2) {
+            return "abnormal";
+        } else if (alarmType === 10 || alarmType === 11 || alarmType === 5 ) {
+            return "signallost";
+        } else {
+            return "normal";
+        }
+    }
+
     public static sendHttpPostReq(url, reqPayload) {
         return new Promise((resolve, reject) => {
             request.post(url, { json: reqPayload }, (err, res, body) => {

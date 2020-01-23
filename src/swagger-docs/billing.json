@@ -1,0 +1,145 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Wegot",
+        "description": "API for WEGOT mobile app",
+        "version": "1.0"
+    },
+    "produces": [
+        "application/json"
+    ],
+    "host": "",
+    "basePath": "/billing",
+    "paths": {
+        "/": {
+            "post": {
+                "tags": [
+                    "Billing"
+                ],
+                "description": "API to get  billing history",
+                "operationId": "getBillingDetails",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Apartment details",
+                        "required": "true",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "site_id": {
+                                    "type": "integer"
+                                },
+                                "apart_id": {
+                                    "type": "integer"
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "description": "API access token",
+                        "in": "header",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "500": {
+                        "description": "SERVER_ERROR"
+                    },
+                    "422": {
+                        "description": "VALIDATION_FAILED"
+                    },
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/billing"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "inletData": {
+            "type": "object",
+            "properties": {
+                "inlet_name": {
+                    "type": "string"
+                },
+                "inlet_usage": {
+                    "type": "string"
+                }
+            }
+        },
+        "billing": {
+            "type": "object",
+            "properties": {
+                "rental_component_charges": {
+                    "type": "integer"
+                },
+                "service_fees": {
+                    "type": "integer"
+                },
+                "venaqua_amc": {
+                    "type": "integer"
+                },
+                "cur_mon_cost": {
+                    "type": "integer"
+                },
+                "year": {
+                    "type": "integer"
+                },
+                "cur_mon_usage": {
+                    "type": "integer"
+                },
+                "total": {
+                    "type": "integer"
+                },
+                "tax": {
+                    "type": "integer"
+                },
+                "site_id": {
+                    "type": "integer"
+                },
+                "block_id": {
+                    "type": "integer"
+                },
+                "apart_id": {
+                    "type": "integer"
+                },
+                "month_select": {
+                    "type": "integer"
+                },
+                "bill_month": {
+                    "type": "string"
+                },
+                "bill_from": {
+                    "type": "string"
+                },
+                "bill_to": {
+                    "type": "string"
+                },
+                "billed_date": {
+                    "type": "string"
+                },
+                "due_date": {
+                    "type": "string"
+                },
+                "inlet_data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/inletData"
+                    }
+                }
+            }
+        }
+    }
+}

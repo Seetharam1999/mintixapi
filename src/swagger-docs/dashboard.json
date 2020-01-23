@@ -2,7 +2,7 @@
     "swagger": "2.0",
     "info": {
         "title": "Wegot",
-        "description": "API for WEGOT mintix mobile app",
+        "description": "API for WEGOT mobile app",
         "version": "1.0"
     },
     "produces": [
@@ -73,10 +73,10 @@
                                 "apart_id": {
                                     "type": "integer"
                                 },
-                                "data": {
+                                "Minlet_data": {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#/definitions/Data"
+                                        "$ref": "#/definitions/inletData"
                                     }
                                 }
                             }
@@ -87,25 +87,28 @@
         }
     },
     "definitions": {
-        "Data": {
+        "inletData": {
             "type": "object",
             "properties": {
-                "name": {
+                "Minlet_name": {
                     "type": "string"
                 },
-                "usage": {
+                "Minlet_usage": {
                     "type": "string"
                 },
-                "icon": {
+                "Minlet_icon": {
                     "type": "string"
                 },
-                "last_updated_date": {
+                "Mlast_updated_date": {
                     "type": "string"
                 },
-                "component_id": {
+                "Mcomponent_id": {
                     "type": "string"
                 },
-		"usage_KW":{
+                "Minlet_alarm_type": {
+                    "type": "string"
+                },
+		"Minlet_usage_KW":{
 		"type":"string"
 		}
             }
