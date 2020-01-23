@@ -1,0 +1,29 @@
+{
+  "name": "mintixapi",
+  "version": "1.0.0",
+  "description": "mintix Mobile api",
+  "main": "index.js",
+  "scripts": {
+    "startbuild": "npm run build:prod && concurrently  -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"yellow.bold,cyan.bold\"  \"nodemon dist/main.js\"",
+    "start": "nodemon --watch src/**/*.ts --exec ts-node src/main.ts",
+    "build:prod": "npm run build-ts && npm run clean:dist && npm run tslint && webpack",
+    "build": "npm run clean:dist && npm run build-ts && npm run tslint",
+    "build-ts": "tsc",
+    "tslint": "tslint -c tslint.json -p tsconfig.json",
+    "clean:dist": "rimraf dist",
+    "test": "mocha --exit --reporter spec --require ts-node/register test/**/*.test.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Seetharam1999/mintixapi.git"
+  },
+  "author": "mintix cloud developer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Seetharam1999/mintixapi/issues"
+  },
+  "homepage": "https://github.com/Seetharam1999/mintixapi#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

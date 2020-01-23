@@ -1,0 +1,114 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Wegot",
+        "description": "API for WEGOT mintix mobile app",
+        "version": "1.0"
+    },
+    "produces": [
+        "application/json"
+    ],
+    "host": "",
+    "basePath": "/dashboard",
+    "paths": {
+        "/": {
+            "post": {
+                "tags": [
+                    "Dashboard"
+                ],
+                "description": "List mintix  details paricular apartment",
+
+                "operationId": "getUsage",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Apartment details and Date range",
+                        "required": "true",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "site_id": {
+                                    "type": "integer"
+                                },
+                                "block_id": {
+                                    "type": "integer"
+                                },
+                                "apart_id": {
+                                    "type": "integer"
+                                },
+                                "from_date": {
+                                    "type": "string"
+                                },
+                                "to_date": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+
+                    
+ 		],
+                "responses": {
+                    "500": {
+                        "description": "SERVER_ERROR"
+                    },
+                    "422": {
+                        "description": "VALIDATION_FAILED"
+                    },
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "site_id": {
+                                    "type": "integer"
+                                },
+                                "block_id": {
+                                    "type": "integer"
+                                },
+                                "apart_id": {
+                                    "type": "integer"
+                                },
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Data"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Data": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "usage": {
+                    "type": "string"
+                },
+                "icon": {
+                    "type": "string"
+                },
+                "last_updated_date": {
+                    "type": "string"
+                },
+                "component_id": {
+                    "type": "string"
+                },
+		"usage_KW":{
+		"type":"string"
+		}
+            }
+        }
+    }
+}

@@ -1,0 +1,275 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Wegot",
+        "description": "API for WEGOT mintix mobile app",
+        "version": "1.0"
+    },
+    "produces": [
+        "application/json"
+    ],
+    "host": "",
+    "basePath": "/session",
+    "paths": {
+        "/{userId}": {
+            "get": {
+                "tags": [
+                    "Session"
+                ],
+                "summary": "Find user by ID",
+                "description": "Returns a single user info",
+                "operationId": "getUserDetails",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "Logged in user ID",
+                        "required": "true",
+                        "type": "integer"
+                    },
+                    {
+                        "name": "token",
+                        "description": "API access token",
+                        "in": "header",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    },
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/login": {
+            "post": {
+                "tags": [
+                    "Session"
+                ],
+                "summary": "User login",
+                "description": "API for login",
+                "operationId": "login",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Login API",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/login"
+                        }
+                    }
+                ],
+                "responses": {
+                    "401": {
+                        "description": "UNAUTHORIZED"
+                    },
+                    "400": {
+                        "description": "BAD_REQUEST",
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        }
+                    },
+                    "500": {
+                        "description": "SERVER_ERROR"
+                    },
+                    "422": {
+                        "description": "VALIDATION_FAILED"
+                    },
+                    "200": {
+                        "description": "Success response",
+                        "schema": {
+                            "$ref": "#/definitions/loginResp"
+                        }
+                    }
+                }
+            }
+        },
+        "/refresh": {
+            "post": {
+                "tags": [
+                    "Session"
+                ],
+                "summary": "Refresh token",
+                "description": "API for refresh token",
+                "operationId": "refresh",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Login API",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "refreshToken": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "400": {
+                        "description": "BAD_REQUEST",
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        }
+                    },
+                    "500": {
+                        "description": "SERVER_ERROR"
+                    },
+                    "422": {
+                        "description": "VALIDATION_FAILED"
+                    },
+                    "200": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "token": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/logout": {
+            "post": {
+                "tags": [
+                    "Session"
+                ],
+                "summary": "Logout",
+                "description": "API for logout",
+                "operationId": "logout",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "logout",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "refreshToken": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "400": {
+                        "description": "BAD_REQUEST",
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        }
+                    },
+                    "500": {
+                        "description": "SERVER_ERROR"
+                    },
+                    "422": {
+                        "description": "VALIDATION_FAILED"
+                    },
+                    "200": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "token": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "error": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string"
+                },
+                "errors": {
+                    "type": "array"
+                }
+            }
+        },
+        "login": {
+            "type": "object",
+            "properties": {
+                "username": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "pushToken": {
+                    "type": "string"
+                },
+                "deviceId": {
+                    "type": "string"
+                }
+            }
+        },
+        "loginResp": {
+            "type": "object",
+            "properties": {
+                "userId": {
+                    "type": "integer"
+                },
+                "token": {
+                    "type": "string"
+                },
+                "refreshToken": {
+                    "type": "string"
+                },
+                "address":{
+                    "type": "object",
+                    "properties": {
+                        "apart_id": {
+                            "type": "string"
+                        },
+                        "site_id": {
+                            "type": "string"
+                        },
+                        "block_id": {
+                            "type": "string"
+                        },
+                        "site_name": {
+                            "type": "string"
+                        },
+                        "site_desc": {
+                            "type": "string"
+                        },
+                        "site_address": {
+                            "type": "string"
+                        },
+                        "block_name": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
