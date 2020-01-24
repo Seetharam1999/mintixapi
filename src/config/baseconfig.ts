@@ -17,11 +17,6 @@ export abstract class BaseConfig {
         database: string
     };
 
-    abstract PushNotification(): {
-        mqttUrl: string,
-        subscribePath: string,
-    };
-
     abstract appConfig(): {
         name: string,
         version: string,
@@ -40,12 +35,4 @@ export abstract class BaseConfig {
         }
     }
 
-    abstract azureStorage(): {
-        key: string,
-        storageAccount: string
-    }
-
-    abstract microServiceConfig(): {
-        notificationBaseURL: string
-    }
 }

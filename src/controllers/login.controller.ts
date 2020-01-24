@@ -16,7 +16,7 @@ export class LoginController {
         this.router.post('/login', this.login);
         this.router.post('/refresh', this.refresh);
         this.router.post('/logout', this.logout);
-        this.router.post('/verifyUser', this.verifyUser);
+//        this.router.post('/verifyUser', this.verifyUser);
         this.router.post('/verifyOTP', this.verifyOTP);
         this.router.post('/register', this.register);
         this.router.post('/changePassword', this.changePassword);
@@ -100,13 +100,14 @@ export class LoginController {
         });
     }
 
-    public verifyUser = async(request: Request, response: Response, next: NextFunction) => {
+   /*verifyUser = async(request: Request, response: Response, next: NextFunction) => {
         const validator = new ValidatorHelper();
         const schema = new ValidatorSchema();
         validator.jsonValidator(schema.verifyUser(), request.body).then(async () => {
             try {
                 let inputData = request.body;
                 let loginManager = new LoginManager();
+
                 let notificationBaseURL = this.baseConfig.microServiceConfig().notificationBaseURL;
                 let isForgotPwd = inputData.isForgotPwd ? inputData.isForgotPwd : false;
                 let isUserFound: Boolean = false;
@@ -147,7 +148,7 @@ export class LoginController {
             Api.invalid(request, response, error);
         });
     }
-
+*/
     // creates the refresh token for 30 days
     private createRefreshToken(userId: string) {
         let jwtRefreshTokenConfig = this.baseConfig.JSONWebToken().refreshToken;
@@ -178,7 +179,7 @@ export class LoginController {
                     if (authenticate) {
                         let token = this.createToken(userId);
                         let refreshToken = this.createRefreshToken(userId);
-                        loginManager.saveToken(user[0]["id"], refreshToken, pushToken , deviceId); 
+                        loginManager.saveToken(user[0]["id"], refreshToken, pushToken , deviceId);
 
                         let address = {
                             "apart_id": user[0]["apartment_id"],
@@ -297,4 +298,3 @@ export class LoginController {
         });
     }
 }
-

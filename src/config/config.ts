@@ -15,7 +15,8 @@ class AppConfig {
                 this.config = new QaSConfig();
                 break;
             default:
-                throw new Error('Invalid environment. Please set the environment first (E.g Set NODE_Env=local)');
+              this.config = new DevConfig();
+                //throw new Error('Invalid environment. Please set the environment first (E.g Set NODE_Env=local)');
         }
     }
 

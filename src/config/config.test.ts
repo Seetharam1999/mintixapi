@@ -17,12 +17,6 @@ export class TestConfig extends BaseConfig {
         };
     }
 
-    public PushNotification() {
-        return {
-            mqttUrl: 'mqtt://dev2.venaqua.com',
-            subscribePath: 'Test/Apna/FA/LE/#'
-        }
-    }
 
     public appConfig(): IAppConfig {
         return {
@@ -46,15 +40,4 @@ export class TestConfig extends BaseConfig {
         }
     }
 
-    public azureStorage() {
-        return {
-            key: 'PXMAhrRAXIRuWPVVdU2P95a02dOFtDezwBTMCz/CFnRwKB5+CKN7PvPK4mSsTZRe3mz8lGEkNg2cRRPDq1ZEXw==',
-            storageAccount: 'wegotinvoices'
-        }
-    }
-    public microServiceConfig() {
-        return {
-            notificationBaseURL: 'http://w2qa3.venaqua.com:3005'
-        }
-    }
 }

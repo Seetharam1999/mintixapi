@@ -1,12 +1,7 @@
 import * as express from 'express';
 import { UserController } from './controllers/user.controller';
 import { LoginController } from './controllers/login.controller';
-import { BillingController } from './controllers/billing.controller';
 import { DashboardController } from './controllers/dashboard.controller';
-import { AlarmController } from './controllers/alarm.controller';
-import { InvoiceController } from './controllers/invoice.controller';
-import { FAQController } from './controllers/faq.controller';
-import { NotificationController } from './controllers/notification.controller';
 export class ApiRouting {
 
     public static ConfigureRouters(app: express.Router) {

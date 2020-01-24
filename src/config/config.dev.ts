@@ -11,9 +11,9 @@ export class DevConfig extends BaseConfig {
         return {
             url: 'localhost',
             user: 'root',
-            password: 'password',
+            password: 'Karunyah',
             port: 3306,
-            database: "we2db"
+            database: "srs"
         };
     }
 

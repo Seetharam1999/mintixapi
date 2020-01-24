@@ -11,7 +11,6 @@ const currenv = env({
 });
 Config.setEnvironment(currenv);
 const api = new WebApi();
-const mqttConfig = new MqttConfig();
 api.run();
 mysql.setConnection();
 //mqttConfig.subscribe();
