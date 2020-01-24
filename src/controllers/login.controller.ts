@@ -189,9 +189,7 @@ export class LoginController {
                             "site_desc": user[0]["site_desc"],
                             "site_address": user[0]["site_address"],
                             "block_name": user[0]["block_name"],
-                            "flat_no": user[0]["doorNo"],
-                            "sqrft": user[0]["sqrft"]
-                        }
+                            }
                         let resp = {
                             userId: userId,
                             userName: username,

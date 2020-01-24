@@ -156,34 +156,18 @@ export class DashboardController {
         result["block_id"] = inputParams["block_id"];
         result["apart_id"] = inputParams["apart_id"];
         result["block_status"] = data[0]["block_status"] ? data[0]["block_status"] : 0;
-        result["Minlet_data"] = [];
+        result["Mintix_data"] = [];
         for (let i in data) {
             if (data[i] != null) {
+              console.log(data[i]["day_total"]);
                 let temp = {};
-                temp["Minlet_name"] = data[i]["cust_name"];
-                temp["Minlet_usage"] =data[i]["day_total"];
-                temp["Minlet_icon"] = data[i]["icon"];
-                temp["Mlast_updated_date"] = data[i]["last_updated_date"];
-                temp["Mcomponent_id"] = data[i]["component_id"]
-		temp["Minlet_alarm_type"] = data[i]["activeAlarm"] === 0 ? "normal" : Helper.getAlarmType(data[i]["alarm_type"]);
-		temp["Minlet_usage_KW"]=data[i]["current_KW"];
-                result["Minlet_data"].push(temp);
+                temp["Mintix_name"] = data[i]["cust_name"];
+                temp["Mintix_usage"] =data[i]["day_total"];
+                temp["Mintx_last_updated_date"] = data[i]["last_updated_date"];
+                temp["Mcomponent_id"] = data[i]["component_id"];
+                result["Mintix_data"].push(temp);
             }
         }
         return result;
-    }
-
-    // setting the alarm type
-    public getAlarmType = (alarmType) => {
-        let alarmDesc;
-        if (alarmType === 1 || alarmType === 12) {
-            return "leakage";
-        } else if (alarmType === 2) {
-            return "abnormal";
-        } else if (alarmType === 10 || alarmType === 11 || alarmType === 5) {
-            return "signallost";
-        } else {
-            return "normal";
-        }
     }
 }
