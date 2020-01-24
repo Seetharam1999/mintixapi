@@ -2,7 +2,7 @@ import { Router, Request, Response, NextFunction, Express } from 'express';
 const swaggerUi = require('swagger-ui-express');
 const sessionDocument = require('../swagger-docs/session.json');
 const dashboardDocument = require('../swagger-docs/dashboard.json');
-const alarmDocument = require('../swagger-docs/alarm.json');
+
 import * as path from 'path';
 
 export class SwaggerController {
