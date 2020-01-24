@@ -13,7 +13,7 @@ export class DevConfig extends BaseConfig {
             user: 'root',
             password: 'Karunyah',
             port: 3306,
-            database: "srs"
+            database: "we2db"
         };
     }
 
