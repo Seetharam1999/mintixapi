@@ -131,17 +131,15 @@ export class DashboardController {
             try {
                 let usage: any = await dashboardManager.getUsage(inputParams["from_date"],
                     inputParams["to_date"], inputParams["apart_id"]);
-		         console.log("usage : ")
-		     console.log(usage);
+                     console.log("usage : ")
+                    console.log(usage);
                 if (usage.length) {
                     result = this.formatDashboard(inputParams, usage);
-		      console.log(result);
-		    }
+                }
                 return Api.ok(request, response, result);
 
-		} catch (error) {
-		//	return Api.ok(request,response,result);
-		return Api.serverError(request, response, error);
+            } catch (error) {
+                return Api.serverError(request, response, error);
             }
         }).catch((error) => {
             Api.invalid(request, response, error);
@@ -156,18 +154,33 @@ export class DashboardController {
         result["block_id"] = inputParams["block_id"];
         result["apart_id"] = inputParams["apart_id"];
         result["block_status"] = data[0]["block_status"] ? data[0]["block_status"] : 0;
-        result["Mintix_data"] = [];
+        result["inlet_data"] = [];
         for (let i in data) {
             if (data[i] != null) {
-              console.log(data[i]["day_total"]);
                 let temp = {};
-                temp["Mintix_name"] = data[i]["cust_name"];
-                temp["Mintix_usage"] =data[i]["day_total"];
-                temp["Mintx_last_updated_date"] = data[i]["last_updated_date"];
-                temp["Mcomponent_id"] = data[i]["component_id"];
-                result["Mintix_data"].push(temp);
+                temp["inlet_name"] = data[i]["cust_name"];
+                temp["inlet_usage"] = data[i]["day_total"];
+                temp["inlet_icon"] = data[i]["icon"];
+                temp["last_updated_date"] = data[i]["last_updated_date"];
+                temp["component_id"] = data[i]["component_id"]
+                temp["inlet_alarm_type"] = data[i]["activeAlarm"] === 0 ? "normal" : Helper.getAlarmType(data[i]["alarm_type"]);
+                result["inlet_data"].push(temp);
             }
         }
         return result;
+    }
+
+    // setting the alarm type
+    public getAlarmType = (alarmType) => {
+        let alarmDesc;
+        if (alarmType === 1 || alarmType === 12) {
+            return "leakage";
+        } else if (alarmType === 2) {
+            return "abnormal";
+        } else if (alarmType === 10 || alarmType === 11 || alarmType === 5) {
+            return "signallost";
+        } else {
+            return "normal";
+        }
     }
 }

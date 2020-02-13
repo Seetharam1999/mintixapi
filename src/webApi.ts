@@ -24,7 +24,7 @@ export class WebApi {
         this.appConfig = this.baseConfig.appConfig();
         this.configureMiddleware();
         this.configureUnAuthRoutes();
-	//   this.authenticateRequest(this.app);
+	   this.authenticateRequest(this.app);
         this.configureRoutes();
     }
 
@@ -33,7 +33,7 @@ export class WebApi {
             if (req.url === '/') {
                 return res.json({
                     name: "MINTIX API",
-                    version: "2.0",
+                    version: "1.0",
                 });
             } else {
 	    let auth = req.headers['x-access-token'] || req.headers["token"].split(" ")[0];

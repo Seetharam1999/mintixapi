@@ -1,4 +1,4 @@
- import { Router, Request, Response, NextFunction } from 'express';
+import { Router, Request, Response, NextFunction } from 'express';
 import { Api, Helper } from './../helpers';
 import { LoginManager } from './../data-manager/login.manager';
 import { Config } from './../config/config';
@@ -16,7 +16,7 @@ export class LoginController {
         this.router.post('/login', this.login);
         this.router.post('/refresh', this.refresh);
         this.router.post('/logout', this.logout);
-//        this.router.post('/verifyUser', this.verifyUser);
+        this.router.post('/verifyUser', this.verifyUser);
         this.router.post('/verifyOTP', this.verifyOTP);
         this.router.post('/register', this.register);
         this.router.post('/changePassword', this.changePassword);
@@ -100,14 +100,13 @@ export class LoginController {
         });
     }
 
-   /*verifyUser = async(request: Request, response: Response, next: NextFunction) => {
+    public verifyUser = async(request: Request, response: Response, next: NextFunction) => {
         const validator = new ValidatorHelper();
         const schema = new ValidatorSchema();
         validator.jsonValidator(schema.verifyUser(), request.body).then(async () => {
             try {
                 let inputData = request.body;
                 let loginManager = new LoginManager();
-
                 let notificationBaseURL = this.baseConfig.microServiceConfig().notificationBaseURL;
                 let isForgotPwd = inputData.isForgotPwd ? inputData.isForgotPwd : false;
                 let isUserFound: Boolean = false;
@@ -148,17 +147,19 @@ export class LoginController {
             Api.invalid(request, response, error);
         });
     }
-*/
+
     // creates the refresh token for 30 days
     private createRefreshToken(userId: string) {
         let jwtRefreshTokenConfig = this.baseConfig.JSONWebToken().refreshToken;
-	        return JsonWebToken.sign({userId: userId, type: "refreshToken"}, jwt.secret,{expiresIn: jwtRefreshTokenConfig.expiresIn});
+        return JsonWebToken.sign({userId: userId, type: "refreshToken"}, jwt.secret,
+        {expiresIn: jwtRefreshTokenConfig.expiresIn});
     }
 
     // create the access token for 10 mins
     private createToken(userId: string|string[]) {
         let jwtAccessTokenConfig = this.baseConfig.JSONWebToken().accessToken;
-	     return JsonWebToken.sign({userId: userId, type: "accessToken"}, jwt.secret, {expiresIn: jwtAccessTokenConfig.expiresIn});
+        return JsonWebToken.sign({userId: userId, type: "accessToken"}, jwt.secret,
+         {expiresIn: jwtAccessTokenConfig.expiresIn});
     };
 
     // attempts to login and saves the id in the corresponding tables
@@ -179,7 +180,7 @@ export class LoginController {
                     if (authenticate) {
                         let token = this.createToken(userId);
                         let refreshToken = this.createRefreshToken(userId);
-                        loginManager.saveToken(user[0]["id"], refreshToken, pushToken , deviceId);
+                        loginManager.saveToken(user[0]["id"], refreshToken, pushToken , deviceId); 
 
                         let address = {
                             "apart_id": user[0]["apartment_id"],
@@ -189,7 +190,9 @@ export class LoginController {
                             "site_desc": user[0]["site_desc"],
                             "site_address": user[0]["site_address"],
                             "block_name": user[0]["block_name"],
-                            }
+                            "flat_no": user[0]["doorNo"],
+                            "sqrft": user[0]["sqrft"]
+                        }
                         let resp = {
                             userId: userId,
                             userName: username,

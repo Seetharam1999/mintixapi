@@ -1,11 +1,10 @@
-import { Environment } from "./index";
 import { IAppConfig } from "./iappconfig";
 
 export abstract class BaseConfig {
 
-    private environment: Environment;
+    private environment;
 
-    constructor(_environment: Environment) {
+    constructor(_environment) {
         this.environment = _environment;
     }
 
@@ -15,6 +14,11 @@ export abstract class BaseConfig {
         password: string,
         port: number,
         database: string
+    };
+
+    abstract PushNotification(): {
+        mqttUrl: string,
+        subscribePath: string,
     };
 
     abstract appConfig(): {
@@ -35,4 +39,12 @@ export abstract class BaseConfig {
         }
     }
 
+    abstract azureStorage(): {
+        key: string,
+        storageAccount: string
+    }
+
+    abstract microServiceConfig(): {
+        notificationBaseURL: string
+    }
 }

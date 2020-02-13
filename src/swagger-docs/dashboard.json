@@ -1,7 +1,7 @@
 {
     "swagger": "2.0",
     "info": {
-        "title": "Wegot Mintix",
+        "title": "Wegot",
         "description": "API for WEGOT mobile app",
         "version": "1.0"
     },
@@ -16,8 +16,7 @@
                 "tags": [
                     "Dashboard"
                 ],
-                "description": "List mintix  details paricular apartment",
-
+                "description": "List water usage for particular apartment",
                 "operationId": "getUsage",
                 "produces": [
                     "application/json"
@@ -48,10 +47,15 @@
                                 }
                             }
                         }
+                    },
+                    {
+                        "name": "token",
+                        "description": "API access token",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
                     }
-
-
- 		],
+                ],
                 "responses": {
                     "500": {
                         "description": "SERVER_ERROR"
@@ -73,10 +77,10 @@
                                 "apart_id": {
                                     "type": "integer"
                                 },
-                                "Mintix_data": {
+                                "inlet_data": {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#/definitions/Data"
+                                        "$ref": "#/definitions/inletData"
                                     }
                                 }
                             }
@@ -87,19 +91,25 @@
         }
     },
     "definitions": {
-        "Data": {
+        "inletData": {
             "type": "object",
             "properties": {
-                "Mintix_name": {
+                "inlet_name": {
                     "type": "string"
                 },
-                "Mintix_usage": {
+                "inlet_usage": {
                     "type": "string"
                 },
-                "Mintix_last_updated_date": {
+                "inlet_icon": {
                     "type": "string"
                 },
-                "Mintix_component_id": {
+                "last_updated_date": {
+                    "type": "string"
+                },
+                "component_id": {
+                    "type": "string"
+                },
+                "inlet_alarm_type": {
                     "type": "string"
                 }
             }

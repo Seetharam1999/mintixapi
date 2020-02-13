@@ -1,20 +1,27 @@
-import { Environment, BaseConfig } from ".";
+import { BaseConfig } from ".";
 import { IAppConfig } from "./iappconfig";
 
 export class DevConfig extends BaseConfig {
 
     constructor() {
-        super(Environment.development);
+        super(process.env.Environment);
     }
 
     public DbConnectionString() {
         return {
-            url: 'localhost',
-            user: 'root',
-            password: 'Karunyah',
+            url: process.env.DB_HOST,
+            user: process.env.DB_USER,
+            password: process.env.DB_PASS,
             port: 3306,
-            database: "mintixdb"
+            database: process.env.MYSQL_DB
         };
+    }
+
+    public PushNotification() {
+        return {
+            mqttUrl: '',
+            subscribePath: ''
+        }
     }
 
     public appConfig(): IAppConfig {
@@ -22,7 +29,7 @@ export class DevConfig extends BaseConfig {
             name: 'WEGOT API',
             version: '1.0.0',
             port: 3000,
-            environment: Environment.development.toString(),
+            environment:process.env.Environment.toString(),
             baseRoute: '/api',
             baseTestRoute: '/api/test',
         };
@@ -36,6 +43,17 @@ export class DevConfig extends BaseConfig {
             accessToken: {
                 expiresIn: "600000"
             }
+        }
+    }
+	public azureStorage() {
+        return {
+            key: "PXMAhrRAXIRuWPVVdU2P95a02dOFtDezwBTMCz/CFnRwKB5+CKN7PvPK4mSsTZRe3mz8lGEkNg2cRRPDq1ZEXw==",
+            storageAccount: "mintix"
+        }
+    }
+    public microServiceConfig() {
+        return {
+            notificationBaseURL: ''
         }
     }
 }

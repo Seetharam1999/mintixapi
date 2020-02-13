@@ -7,8 +7,8 @@ export class ValidatorSchema {
         return joi.object({
             username: joi.string().required(),
             password: joi.string().required(),
-	    //            pushToken: joi.string(),
-	    // deviceId: joi.string(),
+            //pushToken: joi.string(),
+            //deviceId: joi.string(),
         });
     }
     /**
@@ -16,8 +16,8 @@ export class ValidatorSchema {
      */
     public sessionRefresh() {
         return joi.object({
-	          refreshToken: joi.string(),
-	  userId: joi.string()
+            refreshToken: joi.string().required(),
+            userId: joi.string()
         });
     }
     /**
@@ -38,6 +38,35 @@ export class ValidatorSchema {
     public sessionLogout() {
         return joi.object({
             token: joi.string().required()
+        });
+    }
+    /**
+     * Joi validation Schema for billing
+     */
+    public billing() {
+        return joi.object({
+            apart_id: joi.number().required(),
+            site_id: joi.number().required(),
+        });
+    }
+    /**
+     * Joi validation Schema for billing history
+     */
+    public billingHistory() {
+        return joi.object({
+            apart_id: joi.number().required(),
+            site_id: joi.number().required(),
+            skip: joi.number().required(),
+            limit: joi.number().required()
+        });
+    }
+
+    /**
+     * Joi validation Schema for alarms
+     */
+    public alarms() {
+        return joi.object({
+            apart_id: joi.number().required()
         });
     }
     /**
@@ -118,10 +147,13 @@ export class ValidatorSchema {
     // or they can send their user ID and old password
     public updateDeviceInfo() {
         return joi.object({
-   refreshToken: joi.string().required(),
-	   pushToken: joi.string(),
-            deviceId: joi.string(),
-            userId: joi.number(),
+            refreshToken: joi.string().required(),
+            pushToken: joi.string().required(),
+            deviceId: joi.string().required(),
+            userId: joi.number().required(),
         })
     }
 }
+
+
+

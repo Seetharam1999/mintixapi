@@ -1,6 +1,5 @@
 'use strict';
 
-import { Environment } from '../config/environment';
 import { Request, NextFunction, Response } from 'express';
 import { HttpStatusCode } from './index';
 import { Config } from '../config/config';
@@ -130,7 +129,7 @@ const Api = {
         }
         let body = {
             message: statusMessage(HttpStatusCode.SERVER_ERROR),
-            error: (Config.getConfig().appConfig().environment === Environment[Environment.development]) ? error : error.message,
+            error: (Config.getConfig().appConfig().environment === process.env.Environment) ? error : error.message,
           //  query: ResultHelper.fetchResultWithSQLInfo(req, '')
         };
         // let log = new Logger('Error');

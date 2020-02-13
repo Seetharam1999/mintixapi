@@ -33,7 +33,7 @@ export class Helper {
         return OTP;
     }
 
-        public static verifyJwtToken(token: string) {
+    public static verifyJwtToken(token: string) {
         return JsonWebToken.verify(token, jwt.secret, (err, decoded) => {
             if (err) {
                 console.log(err);
@@ -43,7 +43,7 @@ export class Helper {
                 return decoded;
             }
           });
-	  }
+    }
       // setting the alarm type
     public static getAlarmType = (alarmType) => {
         let alarmDesc;
