@@ -9,18 +9,18 @@ export class TestConfig extends BaseConfig {
 
     public DbConnectionString() {
         return {
-            url: '13.71.81.138',
-            user: 'wegotqa3',
-            password: 'wegot@DB3',
+            url: '',
+            user: '',
+            password: '',
             port: 3306,
-            database: 'we2db'
+            database: ''
         };
     }
 
     public PushNotification() {
         return {
-            mqttUrl: 'mqtt://dev2.venaqua.com',
-            subscribePath: 'Test/Apna/FA/LE/#'
+            mqttUrl: '',
+            subscribePath: ''
         }
     }
 
@@ -28,7 +28,7 @@ export class TestConfig extends BaseConfig {
         return {
             name: 'WEGOT API',
             version: '1.0.0',
-            port: 3000,
+            port: 3002,
             environment: Environment.prod.toString(),
             baseRoute: '/api',
             baseTestRoute: '/api/test',
@@ -48,13 +48,13 @@ export class TestConfig extends BaseConfig {
 
     public azureStorage() {
         return {
-            key: 'PXMAhrRAXIRuWPVVdU2P95a02dOFtDezwBTMCz/CFnRwKB5+CKN7PvPK4mSsTZRe3mz8lGEkNg2cRRPDq1ZEXw==',
-            storageAccount: 'wegotinvoices'
+            key: '',
+            storageAccount: ''
         }
     }
     public microServiceConfig() {
         return {
-            notificationBaseURL: 'http://w2qa3.venaqua.com:3005'
+            notificationBaseURL: ''
         }
     }
 }

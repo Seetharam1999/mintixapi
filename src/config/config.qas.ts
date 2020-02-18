@@ -11,17 +11,24 @@ export class QaSConfig extends BaseConfig {
         return {
             url: 'localhost',
             user: 'root',
-            password: 'password',
+            password: '',
             port: 3306,
-            database: 'we2db'
+            database: ''
         };
+    }
+
+    public PushNotification() {
+        return {
+            mqttUrl: '',
+            subscribePath: ''
+        }
     }
 
     public appConfig(): IAppConfig {
         return {
             name: 'WEGOT API',
             version: '1.0.0',
-            port: 3000,
+            port: 3002,
             environment: Environment.qas.toString(),
             baseRoute: '/api',
             baseTestRoute: '/api/test',
@@ -36,6 +43,18 @@ export class QaSConfig extends BaseConfig {
             accessToken: {
                 expiresIn: "600000"
             }
+        }
+    }
+
+    public azureStorage() {
+        return {
+            key: '',
+            storageAccount: ''
+        }
+    }
+    public microServiceConfig() {
+        return {
+            notificationBaseURL: ''
         }
     }
 }

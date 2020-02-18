@@ -126,15 +126,31 @@ export class DashboardController {
         const schema = new ValidatorSchema();
         validator.jsonValidator(schema.dashboard(), request.body).then(async () => {
             let inputParams = request.body;
+            let fromDate = request.body.from_date;
+            let startDate = moment(fromDate).format("YYYY-MM-DD");
+            let days7=moment(startDate).subtract(7,'d').format("YYYY-MM-DD").toString();
+                let days2=moment(startDate).subtract(2,'d').format("YYYY-MM-DD").toString();
+                let month=moment(startDate).subtract(1,'months').format("YYY-MM-DD").toString().substr(2);
+           
+                     let toDate = request.body.to_date.toString();
+            //console.log(fromDate,toDate);
             let dashboardManager = new DashboardManager();
             let result;
             try {
-                let usage: any = await dashboardManager.getUsage(inputParams["from_date"],
-                    inputParams["to_date"], inputParams["apart_id"]);
-                     console.log("usage : ")
-                    console.log(usage);
+                let usage: any = await dashboardManager.getUsage(fromDate,
+                    toDate, inputParams["apart_id"]);
+                    let usage2: any = await dashboardManager.getUsage(days2,
+                        toDate, inputParams["apart_id"]);
+                        let usage7: any = await dashboardManager.getUsage(days7,
+                            toDate, inputParams["apart_id"]);
+                            let usage1month: any = await dashboardManager.getUsage(month,
+                                toDate, inputParams["apart_id"]);
+                        
+                    // console.log("usage : ")
+                  //console.log(usage);
                 if (usage.length) {
-                    result = this.formatDashboard(inputParams, usage);
+                    result = this.formatDashboard(inputParams, usage,usage2,usage7,usage1month);
+                    console.log(result);
                 }
                 return Api.ok(request, response, result);
 
@@ -148,23 +164,26 @@ export class DashboardController {
 
 
     // format the date according the the required structure
-    public formatDashboard = (inputParams, data) => {
+    public formatDashboard = (inputParams, data,data2,data7,dataM) => {
         let result = {};
         result["site_id"] = inputParams["site_id"];
         result["block_id"] = inputParams["block_id"];
         result["apart_id"] = inputParams["apart_id"];
         result["block_status"] = data[0]["block_status"] ? data[0]["block_status"] : 0;
-        result["inlet_data"] = [];
+        result["min_data"] = [];
         for (let i in data) {
             if (data[i] != null) {
                 let temp = {};
-                temp["inlet_name"] = data[i]["cust_name"];
-                temp["inlet_usage"] = data[i]["day_total"];
-                temp["inlet_icon"] = data[i]["icon"];
+                temp["min_name"] = data[i]["cust_name"];
+                temp["min_usage"] = data[i]["day_total"];
+                temp["min_icon"] = data[i]["icon"];
+                temp["min_usage_2days"]=data2[i]["day_total"];
+                temp["min_usage_7days"]=data7[i]["day_total"];
+                temp["min_usage_month"]=dataM[i]["day_total"];
                 temp["last_updated_date"] = data[i]["last_updated_date"];
                 temp["component_id"] = data[i]["component_id"]
-                temp["inlet_alarm_type"] = data[i]["activeAlarm"] === 0 ? "normal" : Helper.getAlarmType(data[i]["alarm_type"]);
-                result["inlet_data"].push(temp);
+                temp["min_alarm_type"] = data[i]["activeAlarm"] === 0 ? "normal" : Helper.getAlarmType(data[i]["alarm_type"]);
+                result["min_data"].push(temp);
             }
         }
         return result;

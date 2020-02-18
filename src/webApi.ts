@@ -24,21 +24,20 @@ export class WebApi {
         this.appConfig = this.baseConfig.appConfig();
         this.configureMiddleware();
         this.configureUnAuthRoutes();
-	   this.authenticateRequest(this.app);
+        this.authenticateRequest(this.app);
         this.configureRoutes();
     }
 
-         private authenticateRequest(app) {
+    private authenticateRequest(app) {
         app.use(async function (req, res, next) {
             if (req.url === '/') {
                 return res.json({
-                    name: "MINTIX API",
+                    name: "WEGOT API",
                     version: "1.0",
                 });
             } else {
-	    let auth = req.headers['x-access-token'] || req.headers["token"].split(" ")[0];
-	console.log(auth);
-		auth = auth.indexOf(",") > -1 ? auth.split(",")[0] : auth;
+                let auth = req.headers['x-access-token'] || req.headers["token"].split(" ")[0];
+                auth = auth.indexOf(",") > -1 ? auth.split(",")[0] : auth;
                 if (!auth) {
                     return Api.unauthorized(req, res);
                 }
@@ -51,7 +50,7 @@ export class WebApi {
                 }
             }
         });
-	}
+    }
 
     private configureMiddleware() {
         this.app.use(json({ limit: '50mb' }));
@@ -74,14 +73,14 @@ export class WebApi {
 
     public run() {
         let server = http.createServer(this.app);
-        server.listen(this.appConfig.port);
+        server.listen(3003);
         server.on('error', this.onError);
         this.handleRejections();
     }
 
     private onError(error) {
         console.log(error);
-        let port = this.appConfig.port;
+        let port = 3003;
         if (error.syscall !== 'listen') {
             throw error;
         }
@@ -105,3 +104,4 @@ export class WebApi {
         }
     }
 }
+

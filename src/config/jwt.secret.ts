@@ -1,3 +1,3 @@
 export const jwt =  {
-    secret : "mintix@321"
+    secret : "WeGotDevSecret@321"
 }

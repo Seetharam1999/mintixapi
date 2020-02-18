@@ -1,7 +1,7 @@
 {
     "swagger": "2.0",
     "info": {
-        "title": "Wegot",
+        "title": "Wegot MINTIX",
         "description": "API for WEGOT mobile app",
         "version": "1.0"
     },

@@ -11,112 +11,6 @@
     "host": "",
     "basePath": "/session",
     "paths": {
-        "/{userId}": {
-            "get": {
-                "tags": [
-                    "Session"
-                ],
-                "summary": "Find user by ID",
-                "description": "Returns a single user info",
-                "operationId": "getUserDetails",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "userId",
-                        "in": "path",
-                        "description": "Logged in user ID",
-                        "required": "true",
-                        "type": "integer"
-                    },
-                    {
-                        "name": "token",
-                        "description": "API access token",
-                        "in": "header",
-                        "required":false,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "405": {
-                        "description": "Invalid input"
-                    },
-                    "200": {
-                        "description": "Success"
-                    }
-                }
-            }
-        },
-        "/register":{
-            "post":{
-                "tags":[
-                    "Session"
-                ],
-                "summary":"User Register",
-                "description":"API for register",
-                "operationid":"register",
-                "produces":[
-                    "application/json"
-                ],
-                "parameters":[
-                    {
-                        "name":"username",
-                        "description":"Register API",
-                        "required":true,
-                        "in":"path",
-                        "type":"string"
-
-                    },{
-                        "name": "email",
-                        "in": "path",
-                        "description": "Logged in user ID",
-                        "required": "true",
-                        "type": "string"
-                    },
-                    {
-                        "name": "password",
-                        "in": "path",
-                        "description": "Logged in user ID",
-                        "required": "true",
-                        "type": "string"
-                    },{
-                        "name": "mobileNumber",
-                        "in": "path",
-                        "description": "Logged in user ID",
-                        "required": "true",
-                        "type": "string"
-                    },
-                    {
-                        "name":"name",
-                        "in":"path",
-                        "description":"name for api",
-                        "required":true,
-                        "type":"string"
-                    }
-                    
-                    
-                ],
-               "responses": {
-                    "401": {
-                        "description": "UNAUTHORIZED"
-                    },
-                    "400": {
-                        "description": "BAD_REQUEST"
-                    },
-                    "500": {
-                        "description": "SERVER_ERROR"
-                    },
-                    "422": {
-                        "description": "VALIDATION_FAILED"
-                    },
-                    "200": {
-                        "description": "Success response"
-                    }
-                }
-            }
-            },
-        
         "/login": {
             "post": {
                 "tags": [
@@ -269,8 +163,8 @@
                     }
                 }
             }
-        },
-
+        }
+    },
     "definitions": {
         "error": {
             "type": "object",
@@ -341,5 +235,4 @@
             }
         }
     }
-}
 }

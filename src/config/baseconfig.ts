@@ -1,10 +1,11 @@
+import { Environment } from "./index";
 import { IAppConfig } from "./iappconfig";
 
 export abstract class BaseConfig {
 
-    private environment;
+    private environment: Environment;
 
-    constructor(_environment) {
+    constructor(_environment: Environment) {
         this.environment = _environment;
     }
 
