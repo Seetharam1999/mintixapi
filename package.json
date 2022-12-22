@@ -24,7 +24,7 @@
     "expo-server-sdk": "^3.4.0",
     "express": "^4.17.1",
     "get-env": "^0.5.10",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "mysql": "^2.18.0",
     "nodemon": "^2.0.2",
     "password-hash": "^1.2.2",
